@@ -7,11 +7,10 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
         Order order = new Order(new HashMap<>());
-        HashMap<Skills, Integer> request;
         Builder builder1 = new Builder(new ArrayList<>(Arrays.asList(Skills.WELDER, Skills.MASON, Skills.PLASTERER, Skills.PLUMBER)), new BigDecimal(1000));
         Builder builder2 = new Builder(new ArrayList<>(Arrays.asList(Skills.WELDER, Skills.PLASTERER, Skills.PLUMBER)), new BigDecimal(500));
         Builder builder3 = new Builder(new ArrayList<>(Arrays.asList(Skills.WELDER, Skills.MASON, Skills.PLUMBER)), new BigDecimal(400));
-        Builder builder4 = new Builder(new ArrayList<>(Arrays.asList(Skills.PLUMBER)), new BigDecimal(1500));
+        Builder builder4 = new Builder(new ArrayList<>(List.of(Skills.PLUMBER)), new BigDecimal(1500));
         Builder builder5 = new Builder(new ArrayList<>(Arrays.asList(Skills.WELDER, Skills.MASON)), new BigDecimal(900));
         Builder builder6 = new Builder(new ArrayList<>(Arrays.asList(Skills.PLASTERER, Skills.PLUMBER)), new BigDecimal(800));
         Builder builder7 = new Builder(new ArrayList<>(Arrays.asList(Skills.WELDER, Skills.PLASTERER)), new BigDecimal(700));
@@ -32,10 +31,13 @@ public class Test {
         team1.builders.addAll(new ArrayList<>(Arrays.asList(builder1, builder2, builder3, builder4, builder8, builder11, builder5, builder14)));
         team2.builders.addAll(new ArrayList<>(Arrays.asList(builder4, builder5, builder6, builder11, builder12, builder13, builder7)));
         team3.builders.addAll(new ArrayList<>(Arrays.asList(builder7, builder8, builder9, builder10, builder2, builder3)));
-
-        HashMap<Skills, List<Builder>>buildersTeamList = Tender.buildBuildersTeamList(order, team1);
-        System.out.println(buildersTeamList);
+        List <Team> teamsList =new ArrayList<>(Arrays.asList(team1,team2,team3));
+     //   HashMap<Skills, List<Builder>>buildersTeamList = Tender.buildBuildersTeamList(order, team1);
+     //   System.out.println(buildersTeamList);
        // System.out.println(Tender.buildersInWork(order, team1));
+      //  System.out.println(Tender.orderMatch(teamsList, order));
+        System.out.println(Tender.getWinner(order,teamsList));
+
 
     }
 }
