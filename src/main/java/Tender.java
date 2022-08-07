@@ -9,7 +9,7 @@ public class Tender {
         int winner = 0;
         List<Team> teamsList=orderMatch(teams,order);
         BigDecimal price=teamsList.get(0).getPrice();
-        for (int i = 1; i < teams.size(); i++) {
+        for (int i = 1; i < teamsList.size(); i++) {
             if (price.compareTo(teamsList.get(i).getPrice())>0){
                  price= teamsList.get(i).getPrice();
                  winner=i;
