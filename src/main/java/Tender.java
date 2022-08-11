@@ -4,22 +4,22 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Tender {
+    public List<Team> teams;
+    public Order order;
 
-    public static Team getWinner(Order order, List<Team> teams) {
-        int winner = 0;
-        List<Team> teamsList=orderMatch(teams,order);
-        BigDecimal price=teamsList.get(0).getPrice();
-        for (int i = 1; i < teamsList.size(); i++) {
-            if (price.compareTo(teamsList.get(i).getPrice())>0){
-                 price= teamsList.get(i).getPrice();
-                 winner=i;
-            }
-        }
-
-        return teamsList.get(winner);
+    public Tender(List<Team> teams, Order order) {
+        this.teams = teams;
+        this.order = order;
     }
 
-    public static List<Team> orderMatch(List<Team> teams, Order order) {
+    public  Team getWinner() {
+        List<Team> teamsList=orderMatch();
+        return teamsList.stream()
+                .min(Comparator.comparing(Team::getPrice))
+                .orElseThrow(() ->new NotFoundMin("Not Found Min"));
+    }
+
+    public  List<Team> orderMatch() {
         List<Team> orderMatch = new ArrayList<>();
         List<Skills> skills = order.vacancies.keySet().stream().toList();
         for (int j = 0; j < teams.size(); j++) {
@@ -34,9 +34,10 @@ public class Tender {
         }
         return orderMatch;
 
+
     }
 
-    public static Map<Skills, Integer> teamScope(Team team) {
+    public  Map<Skills, Integer> teamScope(Team team) {
         return team.builders.stream()
                 .map(Builder::getSkills)
                 .flatMap(Collection::stream)

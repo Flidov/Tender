@@ -26,6 +26,7 @@ public class OrderTest {
     public Team team2;
     public Team team3;
     public List<Team> teamsList;
+    public Tender tender;
 
     @Before
     public void setUp() {
@@ -52,15 +53,29 @@ public class OrderTest {
         team2=new Team(new ArrayList<>(Arrays.asList(builder4, builder5, builder6, builder11, builder12, builder13, builder7)));
         team3=new Team(new ArrayList<>(Arrays.asList(builder7, builder8, builder9, builder10, builder2, builder3)));
         teamsList=new ArrayList<>(Arrays.asList(team1, team2, team3));
+        tender=new Tender(teamsList, order);
     }
 
     @Test
-    public void getWinner() {
+    public void testGetWinner() {
         Team expected = team1;
-        Team actual = Tender.getWinner(order, teamsList);
+        Team actual = tender.getWinner();
         assertEquals(expected, actual);
 
     }
+    @Test
+    public void  testOrderMatch(){
+        List<Team> expected =Arrays.asList(team1,team2);
+        List<Team> actual=tender.orderMatch();
+        assertEquals(expected,actual);
+    }
+    @Test
+    public void testGetPrice(){
+        BigDecimal expected=new BigDecimal(6500);
+        BigDecimal actual=team1.getPrice();
+        assertEquals(expected,actual);
+    }
+
 
 
 }

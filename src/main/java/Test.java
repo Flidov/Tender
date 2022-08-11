@@ -32,11 +32,12 @@ public class Test {
         team2.builders.addAll(new ArrayList<>(Arrays.asList(builder4, builder5, builder6, builder11, builder12, builder13, builder7)));
         team3.builders.addAll(new ArrayList<>(Arrays.asList(builder7, builder8, builder9, builder10, builder2, builder3)));
         List <Team> teamsList =new ArrayList<>(Arrays.asList(team1,team2,team3));
+        Tender tender=new Tender(teamsList, order);
      //   HashMap<Skills, List<Builder>>buildersTeamList = Tender.buildBuildersTeamList(order, team1);
      //   System.out.println(buildersTeamList);
        // System.out.println(Tender.buildersInWork(order, team1));
       //  System.out.println(Tender.orderMatch(teamsList, order));
-        System.out.println(Tender.getWinner(order,teamsList));
+        System.out.println(tender.getWinner());
 
 
     }
